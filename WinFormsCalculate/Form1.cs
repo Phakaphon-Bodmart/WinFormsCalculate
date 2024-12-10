@@ -130,12 +130,12 @@ namespace WinFormsCalculate
         }
         private void clearForm()
         {
-            txtRadius.TextAlign = HorizontalAlignment.Center;   //จัดชิดขวา
+            txtRadius.TextAlign = HorizontalAlignment.Center;   //จัดให้อยู่ตรงกลาง
             txtHeight.TextAlign = HorizontalAlignment.Center;
             txtWidth.TextAlign = HorizontalAlignment.Center;
             txtHexagonWidth.TextAlign = HorizontalAlignment.Center;
 
-            txtRadius.Text = "0";
+            txtRadius.Text = "0";   
             txtHeight.Text = "0";
             txtWidth.Text = "0";
             txtHexagonWidth.Text = "0";
