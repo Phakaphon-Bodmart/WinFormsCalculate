@@ -1,3 +1,5 @@
+using System.Xml.Linq;
+
 namespace WinFormsCalculate
 {
     public partial class Form1 : Form
@@ -9,7 +11,8 @@ namespace WinFormsCalculate
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            MessageBox.Show("ยินดีต้อนรับสู่ขุมนรก,Welcome to the hell");
+            MessageBox.Show("ยินดีต้อนรับสู่ขุมนรก", "Welcome to the hell");
+            clearForm();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -17,7 +20,7 @@ namespace WinFormsCalculate
             if (MessageBox.Show("ยินดีต้อนรับสู่สวรรค์", "Welcome to the heaven!!",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.No)
             {
-                e.Cancel = true; //ยกเลิกคำสั่งปิด Form
+                e.Cancel = true; // ยกเลิกคำสั่งปิด Form
             }
         }
 
@@ -26,76 +29,117 @@ namespace WinFormsCalculate
             this.Close();
         }
 
+        // Method แบบ void สำหรับแสดงผล
+        private void DisplayResult(string result)
+        {
+            lblResult.Text = result;
+        }
+
+        // Method แบบ return สำหรับการคำนวณพื้นที่วงกลม
+        private double CalculateCircleArea(double radius)
+        {
+            return Math.PI * Math.Pow(radius, 2);
+        }
+
         private void btnCircleArea_Click(object sender, EventArgs e)
         {
-            //input รับค่าจาก Textboxชื่อ txtRadius (แปลงชนิดข้อมูลเป็น Double)
-            double Radius = 0;
-            //Radius = Convert.ToDouble(txtRadius.Text);
-            if (double.TryParse(txtRadius.Text, out Radius) == false)
+            // รับค่า input
+            double radius;
+            if (!double.TryParse(txtRadius.Text, out radius))
             {
-                MessageBox.Show("กรอกข้อมูลไม่ถูกต้อง", "Please,try again!!");
-                txtRadius.Focus();  //ให้มี Cursor ที่ Textbox
-                txtRadius.SelectAll();  //ให้ Select (คลุมตัวอักษร)ข้อความใน Textbox
+                MessageBox.Show("กรอกข้อมูลไม่ถูกต้อง", "Please, try again!!");
+                txtRadius.Focus();
+                txtRadius.SelectAll();
                 return;
             }
 
-            //process คำนวณพื้นที่ สูตร PI*r*r
-            double CircleArea = Math.PI * Math.Pow(Radius, 2);
-            //Math.PI ให้ค่า pi
-            //Math.POW(X,Y)  X ยกกำลัง Y
+            // คำนวณ
+            double circleArea = CalculateCircleArea(radius);
 
-            //output นำไปแสดงผลที่ txtResult
-            lblResult.Text = CircleArea.ToString("0.00");
+            // แสดงผล
+            DisplayResult(circleArea.ToString("0.00"));
             txtRadius.Focus();
             txtRadius.SelectAll();
         }
 
+        // Method แบบ return สำหรับการคำนวณพื้นที่สามเหลี่ยม
+        private double CalculateTriangleArea(double height, double width)
+        {
+            return 0.5 * height * width;
+        }
+
         private void btnTriangleArea_Click(object sender, EventArgs e)
         {
-            //input
-            double Height = 0, Width = 0;
-            if (double.TryParse(txtHeight.Text, out Height) == false)
+            // รับค่า input
+            double height, width;
+            if (!double.TryParse(txtHeight.Text, out height))
             {
-                MessageBox.Show("กรอกข้อมูลไม่ถูกต้อง", "Please,try again!!");
-                txtHeight.Focus();  //ให้มี Cursor ที่ Textbox
-                txtHeight.SelectAll();  //ให้ Select (คลุมตัวอักษร)ข้อความใน Textbox
+                MessageBox.Show("กรอกข้อมูลไม่ถูกต้อง", "Please, try again!!");
+                txtHeight.Focus();
+                txtHeight.SelectAll();
                 return;
             }
-            if (double.TryParse(txtWidth.Text, out Width) == false)
+
+            if (!double.TryParse(txtWidth.Text, out width))
             {
-                MessageBox.Show("กรอกข้อมูลไม่ถูกต้อง", "Please,try again!!");
-                txtWidth.Focus();  //ให้มี Cursor ที่ Textbox
-                txtWidth.SelectAll();  //ให้ Select (คลุมตัวอักษร)ข้อความใน Textbox
+                MessageBox.Show("กรอกข้อมูลไม่ถูกต้อง", "Please, try again!!");
+                txtWidth.Focus();
+                txtWidth.SelectAll();
                 return;
             }
-            //process
-            double TriangleArea = 0.5 * Height * Width;
-            //output
-            lblResult.Text = TriangleArea.ToString("0.00");
+
+            // คำนวณ
+            double triangleArea = CalculateTriangleArea(height, width);
+
+            // แสดงผล
+            DisplayResult(triangleArea.ToString("0.00"));
             txtHeight.Focus();
             txtHeight.SelectAll();
         }
 
+        // Method แบบ return สำหรับการคำนวณพื้นที่หกเหลี่ยม
+        private double CalculateHexagonArea(double sideLength)
+        {
+            return (3 * Math.Sqrt(3) / 2) * Math.Pow(sideLength, 2);
+        }
+
         private void btnHexagonArea_Click(object sender, EventArgs e)
         {
-            // Input
-            double Hexagon;
-            if (!double.TryParse(txtHexagonWidth.Text, out Hexagon) || Hexagon <= 0)
+            // รับค่า input
+            double sideLength;
+            if (!double.TryParse(txtHexagonWidth.Text, out sideLength))
             {
-                MessageBox.Show("กรุณาใส่ค่าความยาวด้านที่ถูกต้อง", "Please,try again!!");
+                MessageBox.Show("กรุณาใส่ค่าความยาวด้านที่ถูกต้อง", "Please, try again!!");
                 txtHexagonWidth.Focus();
                 txtHexagonWidth.SelectAll();
                 return;
             }
 
-            // Process
-            double hexagonArea = (3 * Math.Sqrt(3) / 2) * Math.Pow(Hexagon, 2);
+            // คำนวณ
+            double hexagonArea = CalculateHexagonArea(sideLength);
 
-            // Output
-            lblResult.Text = hexagonArea.ToString("0.00"); // แสดงผลในรูปแบบทศนิยม 2 ตำแหน่ง
+            // แสดงผล
+            DisplayResult(hexagonArea.ToString("0.00"));
             txtHexagonWidth.Focus();
             txtHexagonWidth.SelectAll();
         }
 
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            clearForm();
+        }
+        private void clearForm()
+        {
+            txtRadius.TextAlign = HorizontalAlignment.Center;   //จัดชิดขวา
+            txtHeight.TextAlign = HorizontalAlignment.Center;
+            txtWidth.TextAlign = HorizontalAlignment.Center;
+            txtHexagonWidth.TextAlign = HorizontalAlignment.Center;
+
+            txtRadius.Text = "0";
+            txtHeight.Text = "0";
+            txtWidth.Text = "0";
+            txtHexagonWidth.Text = "0";
+            lblResult.Text = "";
+        }
     }
 }

@@ -45,6 +45,7 @@
             lblResult = new Label();
             label6 = new Label();
             button4 = new Button();
+            btnClear = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -226,15 +227,28 @@
             button4.Name = "button4";
             button4.Size = new Size(171, 41);
             button4.TabIndex = 11;
-            button4.Text = "ออกจากนรก";
+            button4.Text = "ออก";
             button4.UseVisualStyleBackColor = false;
             button4.Click += button4_Click;
+            // 
+            // btnClear
+            // 
+            btnClear.BackColor = Color.Fuchsia;
+            btnClear.Font = new Font("DM Sans", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnClear.Location = new Point(673, 398);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(171, 41);
+            btnClear.TabIndex = 13;
+            btnClear.Text = "เริ่มใหม่";
+            btnClear.UseVisualStyleBackColor = false;
+            btnClear.Click += btnClear_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(905, 503);
+            Controls.Add(btnClear);
             Controls.Add(button4);
             Controls.Add(label6);
             Controls.Add(lblResult);
@@ -274,5 +288,6 @@
         private Label label6;
         private Button button4;
         private TextBox txtHeight;
+        private Button btnClear;
     }
 }
