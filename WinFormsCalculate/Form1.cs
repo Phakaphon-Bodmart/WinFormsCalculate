@@ -140,6 +140,7 @@ namespace WinFormsCalculate
             txtWidth.Text = "0";
             txtHexagonWidth.Text = "0";
             lblResult.Text = "";
+            txtRadius.Focus();
         }
     }
 }
